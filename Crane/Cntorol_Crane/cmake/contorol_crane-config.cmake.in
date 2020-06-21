@@ -1,0 +1,54 @@
+# Contorol_Crane CMake config file
+#
+# This file sets the following variables:
+# Contorol_Crane_FOUND - Always TRUE.
+# Contorol_Crane_INCLUDE_DIRS - Directories containing the Contorol_Crane include files.
+# Contorol_Crane_IDL_DIRS - Directories containing the Contorol_Crane IDL files.
+# Contorol_Crane_LIBRARIES - Libraries needed to use Contorol_Crane.
+# Contorol_Crane_DEFINITIONS - Compiler flags for Contorol_Crane.
+# Contorol_Crane_VERSION - The version of Contorol_Crane found.
+# Contorol_Crane_VERSION_MAJOR - The major version of Contorol_Crane found.
+# Contorol_Crane_VERSION_MINOR - The minor version of Contorol_Crane found.
+# Contorol_Crane_VERSION_REVISION - The revision version of Contorol_Crane found.
+# Contorol_Crane_VERSION_CANDIDATE - The candidate version of Contorol_Crane found.
+
+message(STATUS "Found Contorol_Crane-@PROJECT_VERSION@")
+set(Contorol_Crane_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(Contorol_Crane_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(Contorol_Crane_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(Contorol_Crane_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(Contorol_Crane_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(Contorol_Crane_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(Contorol_Crane_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(Contorol_Crane_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(Contorol_Crane_VERSION @PROJECT_VERSION@)
+set(Contorol_Crane_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(Contorol_Crane_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(Contorol_Crane_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(Contorol_Crane_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
